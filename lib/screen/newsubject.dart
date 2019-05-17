@@ -46,6 +46,7 @@ class _AddTodoState extends State<Newsub> {
           _db.insert(todo).then((r) {
             Navigator.pushReplacementNamed(context, '/');
           });
+         
         }
       },
     );

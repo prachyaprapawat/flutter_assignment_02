@@ -5,36 +5,55 @@ final String tableToDo = 'todo';
 final String columnId = '_id';
 final String columnTitle = 'title';
 final String columnDone = 'done';
+final String columnstep = 'step';
+final String columntree = 'tree';
+
 
 class Todo {
   int _id;
   String _title;
   bool _done;
-
-
+  int _tree = 0;
+  int _step = 0;
 
   String get title => this._title;
   set title(String title) => this._title = title;
-bool get done => this._done;
+  bool get done => this._done;
   set done(bool done) => this._done = done;
+  int get tree => this._tree;
+  int get step => this._step;
+  set step(int step) => this._step = step;
+  set tree(int tree) => this._tree = tree;
 
 
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       columnTitle: _title,
-      columnDone: done == true ? 1 : 0
+      columnDone: done == true ? 1 : 0,
+      columnstep : step,
+      columntree : tree 
     };
     if (_id != null) {
       map[columnId] = _id;
     }
-
     return map;
   }
 
   Todo({String subject}) {
     this._title = subject;
   }
+
+  TodoTree({int tree}) {
+    this._tree = tree;
+  }
+
+  TodoStep({int step}) {
+    this._step = step;
+  }
+
+
+
 
 
   Todo.fromMap(Map<String, dynamic> map) {
@@ -59,7 +78,9 @@ class TodoProvider {
           CREATE TABLE $tableToDo (
             $columnId integer primary key autoincrement,
             $columnTitle text not null,
-            $columnDone integer not null
+            $columnDone integer not null,
+            $columnstep integer not null,
+            $columntree integer not null
           )
         ''');
       },
